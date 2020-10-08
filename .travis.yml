@@ -9,10 +9,14 @@ script:
   - docker run -e CI=true lastsummer/react-test npm test
 
 after_success:
-  - docker build -t lastsummer/multi-react -f ./client
-  - docker build -t lastsummer/multi-nginx -f ./nginx
-  - docker build -t lastsummer/multi-server -f ./server
-  - docker build -t lastsummer/multi-worker -f ./worker
+  - docker build -t lastsummer/multi-react ./client
+  - docker build -t lastsummer/multi-nginx ./nginx
+  - docker build -t lastsummer/multi-server ./server
+  - docker build -t lastsummer/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub 
+  - docker push lastsummer/multi-react
+  - docker push lastsummer/multi-nginx
+  - docker push lastsummer/multi-server
+  - docker push lastsummer/multi-worker
