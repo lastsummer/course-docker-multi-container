@@ -3,20 +3,20 @@ services:
  - docker
 
 before_install:
-  - docker build -t lastsummer/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t summer0531/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true lastsummer/react-test npm test
+  - docker run -e CI=true summer0531/react-test npm test
 
 after_success:
-  - docker build -t lastsummer/multi-react ./client
-  - docker build -t lastsummer/multi-nginx ./nginx
-  - docker build -t lastsummer/multi-server ./server
-  - docker build -t lastsummer/multi-worker ./worker
+  - docker build -t summer0531/multi-react ./client
+  - docker build -t summer0531/multi-nginx ./nginx
+  - docker build -t summer0531/multi-server ./server
+  - docker build -t summer0531/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub 
-  - docker push lastsummer/multi-react
-  - docker push lastsummer/multi-nginx
-  - docker push lastsummer/multi-server
-  - docker push lastsummer/multi-worker
+  - docker push summer0531/multi-react
+  - docker push summer0531/multi-nginx
+  - docker push summer0531/multi-server
+  - docker push summer0531/multi-worker
